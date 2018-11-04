@@ -1,4 +1,4 @@
-# Instagram-Details
+# KV-001-instagram-details-fetcher
 
 A simple php api to get any Instagram account details.
 
