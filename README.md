@@ -1,4 +1,4 @@
-# My-Instagram-Details
+# Instagram-Details
 
 A simple php api to get any Instagram account details.
 
