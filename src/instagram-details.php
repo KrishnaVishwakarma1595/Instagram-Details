@@ -17,21 +17,28 @@
 
 		function initializeUser($username){
 			
-			$fetchUrl = $this->instagrmaUrl.$username;
+			if(!empty($username) && $username != ''){
+			
+				$fetchUrl = $this->instagrmaUrl.$username;
 
-			$str = file_get_contents($fetchUrl);
+				$str = file_get_contents($fetchUrl);
 
-			$html = str_get_html($str);			
+				$html = str_get_html($str);			
 
-			$data = $html->find('#react-root' , 0)->next_sibling();
+				$data = $html->find('#react-root' , 0)->next_sibling();
 
-			$data = trim($data, '<pre><script type="text/javascript">window._sharedData = ;');
+				$data = trim($data, '<pre><script type="text/javascript">window._sharedData = ;');
 
-			$userData = json_decode($data);
+				$userData = json_decode($data);
 
-			$this->csrf_token = $userData->config->csrf_token;
+				$this->csrf_token = $userData->config->csrf_token;
 
-			$this->userData = $userData->entry_data->ProfilePage[0]->graphql->user;
+				$this->userData = $userData->entry_data->ProfilePage[0]->graphql->user;
+				
+			}else{
+				throw new \Exception("Error: initializeUser() - Configuration data is missing.");								
+
+			}
 
 		}
 
